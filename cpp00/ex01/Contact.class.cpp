@@ -64,8 +64,7 @@ std::string Contact::getString(info type) const
     }
     if (ret.size() > 10)
     {
-        while (ret.size() > 10)
-            ret.pop_back();
+        ret.resize(10);
         ret[9] = '.';
     }
     return (ret);

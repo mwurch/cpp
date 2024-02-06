@@ -1,9 +1,11 @@
 #include <iostream>
 #include "PhoneBook.class.hpp"
+#include "linkedList.hpp"
 
 PhoneBook::PhoneBook(int a1) : contact_count(a1)
 {
 	std::cout << "Welcome to my crappy awesome Phonebook" << std::endl;
+	this->list = NULL;
 };
 
 PhoneBook::~PhoneBook( void )
@@ -53,10 +55,10 @@ void	PhoneBook::add()
 	std::getline(std::cin, secret);
 
 	Contact newContact(firstName, lastName, phoneNumber, nickName, secret);
-	this->contactList.push_front(newContact);
+	add_front(create_element(newContact));
 	if (contact_count == 8)
 	{
-		this->contactList.pop_back();
+		pop_back();
 		decrease_contact_count();
 	}
 	increase_contact_count();
@@ -64,46 +66,40 @@ void	PhoneBook::add()
 
 void	PhoneBook::search()
 {
-	int 		index = 1;
+	int 		index;;
 	int			user_input_int;
 	std::string userInput;
+	list_element *curr = this->list;
 
-	if (this->contactList.empty())
+	if (getContactCount() == 0)
 	{
 		std::cout << "The Phonebook is empty! Please use 'ADD' to add a Contact to this Phonebook" << std::endl;
 		return ;
 	}
-	for (const auto &contact : this->contactList)
+	for (index = 1; index <= getContactCount(); index++)
 	{
 		std::cout << " | ";
 		std::cout << std::setfill(' ') << std::setw(10);
-		std::cout << index++;
+		std::cout << index;
 		std::cout << " | ";
 		std::cout << std::setfill(' ') << std::setw(10);
-		std::cout << contact.getString(FIRST);
+		std::cout << curr->contact.getString(FIRST);
 		std::cout << " | ";
 		std::cout << std::setfill(' ') << std::setw(10);
-		std::cout << contact.getString(LAST);
+		std::cout << curr->contact.getString(LAST);
 		std::cout << " | ";
 		std::cout << std::setfill(' ') << std::setw(10);
-		std::cout << contact.getString(NICK);
+		std::cout << curr->contact.getString(NICK);
 		std::cout << " | ";
 		std::cout << std::setfill(' ') << std::setw(10);
-		std::cout << contact.getString(NUMBER);
+		std::cout << curr->contact.getString(NUMBER);
 		std::cout << " | ";
 		std::cout << std::endl;
+		curr = curr->next;
 	}
 	std::cout << "Please enter the index of the contact you wish to see more information on: ";
 	std::getline(std::cin, userInput);
-	try {
-		user_input_int = std::stoi(userInput);
-	} catch (const std::invalid_argument& err) {
-		std::cerr << "Invalid argument" << std::endl;
-		return ;
-	} catch ( const std::out_of_range& err) {
-		std::cerr << "Invalid argument" << std::endl;
-		return ;
-	}
+	user_input_int = get_data(userInput);
 	if (user_input_int < 1 || user_input_int > this->contact_count)
 	{
 		std::cout << "Not a valid index!" << std::endl;
@@ -112,28 +108,40 @@ void	PhoneBook::search()
 	displayContact(user_input_int);
 }
 
-void	PhoneBook::clearContactList()
-{
-	this->contactList.clear();
-}
-
 void	PhoneBook::displayContact ( int i ) const
 {
-	int	x = 1;
-	std::list<Contact>::const_iterator it;
-	for (it = contactList.begin(); it != contactList.end() && x != i; it++)
-		x++;
-	
+	list_element	*curr = this->list;
+	int				x = 0;
+	while (curr->next != NULL && ++x != i)
+		curr = curr->next;
 	std::cout << "--------------------------" << std::endl;
-	std::cout << "First Name: " << it->getFirstName() << std::endl;
-	std::cout << "Last Name: " << it->getLastName() << std::endl;
-	std::cout << "Nickname: " << it->getNickName() << std::endl;
-	std::cout << "Phonenumber: " << it->getPhoneNumber() << std::endl;
-	std::cout << "Secret: " << it->getSecret() << std::endl;
+	std::cout << "First Name: " << curr->contact.getFirstName() << std::endl;
+	std::cout << "Last Name: " << curr->contact.getLastName() << std::endl;
+	std::cout << "Nickname: " << curr->contact.getNickName() << std::endl;
+	std::cout << "Phonenumber: " << curr->contact.getPhoneNumber() << std::endl;
+	std::cout << "Secret: " << curr->contact.getSecret() << std::endl;
 	std::cout << "--------------------------" << std::endl;
 }
 
 std::string	PhoneBook::get_user_input( void ) const
 {
 	return (this->user_input);
+}
+
+
+int PhoneBook::get_data(std::string str)
+{
+	long	ret = 0;
+	int		i = 0;
+	
+	while (str[i] && std::isdigit(str[i]))
+	{
+		ret = ret * 10 + (str[i] - 48);
+		i++;
+	}
+	if (str[i] != '\0')
+		return (-2);
+	if (std::numeric_limits<int>::max() < ret)
+		return (-2);
+	return (static_cast<int>(ret));
 }
