@@ -50,6 +50,7 @@ int main(int argc, char **argv)
 		line = find_and_replace(line, argv[2], argv[3]);
 		outputfile << line;
 	}
+	
 	outputfile.close();
 	inputfile.close();
 }
