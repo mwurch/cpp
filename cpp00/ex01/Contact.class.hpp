@@ -24,6 +24,7 @@ class Contact
 
 	public:
 
+		Contact();
 		Contact(std::string f, std::string l, std::string nbr, std::string n, std::string s);
 		~Contact();
 		std::string	getFirstName( void ) const;

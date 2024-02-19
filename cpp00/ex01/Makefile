@@ -6,7 +6,7 @@ SRC_DIR := .
 OBJ_DIR := obj
 
 
-SRC_FILES := PhoneBook.class.cpp Contact.class.cpp main.cpp linkedList.cpp
+SRC_FILES := PhoneBook.class.cpp Contact.class.cpp main.cpp
 OBJ_FILES := $(patsubst %.cpp,$(OBJ_DIR)/%.o,$(SRC_FILES))
 OBJ_DIRS := $(sort $(dir $(OBJ_FILES)))
 

@@ -20,6 +20,5 @@ int main( void )
 		myPhoneBook.promptUser();
 		user_input = myPhoneBook.get_user_input();
 	}
-	myPhoneBook.delete_list();
 	return (0);
 }

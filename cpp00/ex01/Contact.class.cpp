@@ -1,16 +1,15 @@
 #include <iostream>
 #include "Contact.class.hpp"
 
+Contact::Contact() {}
 
 Contact::Contact(std::string f, std::string l, std::string nbr, std::string n, std::string s)
 : firstName(f), lastName(l), nickName(n), secret(s), phoneNumber(nbr)
 {
-    std::cout << "Contact OBJ is created" << std::endl;
 }
 
 Contact::~Contact()
 {
-    std::cout << "Contact OBJ is deleted" << std::endl;
 }
 
 std::string Contact::getFirstName( void ) const

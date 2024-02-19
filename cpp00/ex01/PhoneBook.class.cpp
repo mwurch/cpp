@@ -1,17 +1,14 @@
 #include <iostream>
 #include "PhoneBook.class.hpp"
-#include "linkedList.hpp"
 
 PhoneBook::PhoneBook(int a1) : contact_count(a1)
 {
 	std::cout << "Welcome to my crappy awesome Phonebook" << std::endl;
-	this->list = NULL;
-};
+}
 
 PhoneBook::~PhoneBook( void )
 {
-
-};
+}
 
 int		PhoneBook::getContactCount( void ) const
 {
@@ -35,6 +32,19 @@ void	PhoneBook::promptUser()
 	std::getline(std::cin, this->user_input);
 }
 
+void			PhoneBook::add_front(Contact & newContact)
+{	
+	int count = getContactCount();
+
+	for (int i = 6; i >= 0; i--)
+	{
+		if (i > count - 1)
+			continue;
+		this->contactList[i + 1] = this->contactList[i]; 
+	}
+	this->contactList[0]= newContact;
+}
+
 void	PhoneBook::add()
 {
 	std::string firstName, lastName, nickName, secret, phoneNumber;
@@ -55,13 +65,9 @@ void	PhoneBook::add()
 	std::getline(std::cin, secret);
 
 	Contact newContact(firstName, lastName, phoneNumber, nickName, secret);
-	add_front(create_element(newContact));
-	if (contact_count == 8)
-	{
-		pop_back();
-		decrease_contact_count();
-	}
-	increase_contact_count();
+	add_front(newContact);
+	if (contact_count != 8)
+		increase_contact_count();
 }
 
 void	PhoneBook::search()
@@ -69,33 +75,31 @@ void	PhoneBook::search()
 	int 		index;;
 	int			user_input_int;
 	std::string userInput;
-	list_element *curr = this->list;
 
 	if (getContactCount() == 0)
 	{
 		std::cout << "The Phonebook is empty! Please use 'ADD' to add a Contact to this Phonebook" << std::endl;
 		return ;
 	}
-	for (index = 1; index <= getContactCount(); index++)
+	for (index = 0; index < getContactCount(); index++)
 	{
 		std::cout << " | ";
 		std::cout << std::setfill(' ') << std::setw(10);
-		std::cout << index;
+		std::cout << index + 1;
 		std::cout << " | ";
 		std::cout << std::setfill(' ') << std::setw(10);
-		std::cout << curr->contact.getString(FIRST);
+		std::cout << contactList[index].getString(FIRST);
 		std::cout << " | ";
 		std::cout << std::setfill(' ') << std::setw(10);
-		std::cout << curr->contact.getString(LAST);
+		std::cout << contactList[index].getString(LAST);
 		std::cout << " | ";
 		std::cout << std::setfill(' ') << std::setw(10);
-		std::cout << curr->contact.getString(NICK);
+		std::cout << contactList[index].getString(NICK);
 		std::cout << " | ";
 		std::cout << std::setfill(' ') << std::setw(10);
-		std::cout << curr->contact.getString(NUMBER);
+		std::cout << contactList[index].getString(NUMBER);
 		std::cout << " | ";
 		std::cout << std::endl;
-		curr = curr->next;
 	}
 	std::cout << "Please enter the index of the contact you wish to see more information on: ";
 	std::getline(std::cin, userInput);
@@ -110,16 +114,12 @@ void	PhoneBook::search()
 
 void	PhoneBook::displayContact ( int i ) const
 {
-	list_element	*curr = this->list;
-	int				x = 0;
-	while (curr->next != NULL && ++x != i)
-		curr = curr->next;
 	std::cout << "--------------------------" << std::endl;
-	std::cout << "First Name: " << curr->contact.getFirstName() << std::endl;
-	std::cout << "Last Name: " << curr->contact.getLastName() << std::endl;
-	std::cout << "Nickname: " << curr->contact.getNickName() << std::endl;
-	std::cout << "Phonenumber: " << curr->contact.getPhoneNumber() << std::endl;
-	std::cout << "Secret: " << curr->contact.getSecret() << std::endl;
+	std::cout << "First Name: " << contactList[i - 1].getFirstName() << std::endl;
+	std::cout << "Last Name: " << contactList[i - 1].getLastName() << std::endl;
+	std::cout << "Nickname: " << contactList[i - 1].getNickName() << std::endl;
+	std::cout << "Phonenumber: " << contactList[i - 1].getPhoneNumber() << std::endl;
+	std::cout << "Secret: " << contactList[i - 1].getSecret() << std::endl;
 	std::cout << "--------------------------" << std::endl;
 }
 
