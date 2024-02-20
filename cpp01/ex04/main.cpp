@@ -5,22 +5,28 @@
 std::string find_and_replace(std::string line, std::string to_replace, std::string replace_with)
 {
 	size_t	pos = line.find(to_replace, 0);
-	if (pos == std::string::npos)
-		return (line);
-	line.erase(pos, to_replace.length());
-	line.insert(pos, replace_with);
+	while (pos != std::string::npos)
+	{
+		line.erase(pos, to_replace.length());
+		line.insert(pos, replace_with);
+		pos = line.find(to_replace, 0);
+	}
+	// if (pos == std::string::npos)
+	// 	return (line);
 	return (line);
 }
 
-int	open_files(std::string filename, std::ifstream &inputfile, std::ofstream &outputfile)
+int	open_files(char *filename, std::ifstream &inputfile, std::ofstream &outputfile)
 {
+	std::string _filename = filename;
+	std::string outfile = _filename + ".replace";
 	inputfile.open(filename);
 	if (!inputfile.is_open())
 	{
 		std::cerr << "Inputfile could not be opened" << std::endl;
 		return (0);
 	}
-	outputfile.open(filename + ".replace");
+	outputfile.open(outfile.c_str());
 	if (!outputfile.is_open())
 	{
 		inputfile.close();
@@ -32,7 +38,6 @@ int	open_files(std::string filename, std::ifstream &inputfile, std::ofstream &ou
 
 int main(int argc, char **argv)
 {
-	std::string filename = argv[1];
 	std::string line;
 	std::ifstream inputfile;
 	std::ofstream outputfile;
@@ -42,7 +47,7 @@ int main(int argc, char **argv)
 		std::cerr << "Not ecough or too many inputs!" << std::endl;
 		return (-1);
 	}
-	if (!open_files(filename, inputfile, outputfile))
+	if (!open_files(argv[1], inputfile, outputfile))
 		return (-1);
 	while (!inputfile.eof())
 	{
