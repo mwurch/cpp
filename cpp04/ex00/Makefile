@@ -5,7 +5,7 @@ CXXFLAGS := -Wall -Wextra -Werror -std=c++98
 SRC_DIR := .
 OBJ_DIR := ./obj
 
-SRC_FILES := main.cpp 
+SRC_FILES := main.cpp Dog.cpp Cat.cpp Animal.cpp
 OBJ_FILES := $(patsubst %.cpp,$(OBJ_DIR)/%.o,$(SRC_FILES))
 OBJ_DIRS := $(sort $(dir $(OBJ_FILES)))
 
