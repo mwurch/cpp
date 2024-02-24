@@ -11,8 +11,6 @@ std::string find_and_replace(std::string line, std::string to_replace, std::stri
 		line.insert(pos, replace_with);
 		pos = line.find(to_replace, 0);
 	}
-	// if (pos == std::string::npos)
-	// 	return (line);
 	return (line);
 }
 
@@ -44,18 +42,19 @@ int main(int argc, char **argv)
 
 	if (argc != 4)
 	{
-		std::cerr << "Not ecough or too many inputs!" << std::endl;
+		std::cerr << "Not enough or too many inputs!" << std::endl;
 		return (-1);
 	}
 	if (!open_files(argv[1], inputfile, outputfile))
 		return (-1);
-	while (!inputfile.eof())
+	while (std::getline(inputfile, line))
 	{
-		std::getline(inputfile, line);
+		std::cout << "\033[33m" << line << std::endl;
 		line = find_and_replace(line, argv[2], argv[3]);
-		outputfile << line;
+		outputfile << line;;
+		if (!inputfile.eof())
+			outputfile << "\n";
 	}
-	
 	outputfile.close();
 	inputfile.close();
 }
