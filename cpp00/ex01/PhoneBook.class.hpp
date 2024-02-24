@@ -9,7 +9,7 @@ class PhoneBook
 	
 	private:
 	
-	Contact			contactList[8];
+	Contact				contactList[8];
 	std::string 		user_input;
 	int					contact_count;
 	int				getContactCount( void ) const;
@@ -25,7 +25,7 @@ class PhoneBook
 	PhoneBook(int a1);
 	~PhoneBook();
 
-	
+
 	void			promptUser();
 	void			add();
 	void			search();

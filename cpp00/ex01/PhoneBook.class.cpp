@@ -64,6 +64,12 @@ void	PhoneBook::add()
 	std::cout << "Please enter Secret: ";
 	std::getline(std::cin, secret);
 
+	if (secret.empty() || firstName.empty() || lastName.empty() || nickName.empty() || phoneNumber.empty())
+	{
+		std::cout << "Please fill all the contacts with information" << std::endl;
+		return ;
+	}
+	
 	Contact newContact(firstName, lastName, phoneNumber, nickName, secret);
 	add_front(newContact);
 	if (contact_count != 8)
