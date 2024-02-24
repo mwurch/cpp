@@ -20,7 +20,22 @@ int main()
         std::cout << i << std::endl;
         zoo[i]->makeSound();
     }
+    std::cout << std::endl << std::endl << "======================================" << std::endl;
+    const Animal* test = new Cat();
+    delete test;
+    test = zoo[0];
+    std::cout << test << "  " << zoo[0] << std::endl;
+    test->makeSound();
     for (int i = 0; i < 10; i++)
         delete zoo[i];
+    
+
+    Animal* animalPtr = new Cat();
+    Cat* copiedCatPtr = new Cat(*dynamic_cast<Cat*>(animalPtr));
+
+    std::cout << animalPtr->getBrain() << "  " << copiedCatPtr->getBrain() << std::endl;
+
+    delete animalPtr;
+    delete copiedCatPtr;
     return 0;
 }

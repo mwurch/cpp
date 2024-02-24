@@ -10,7 +10,7 @@ Cat::~Cat()
     std::cout << "\033[31m" << "Cat destructor was called!" << "\033[0m" << std::endl;
 }
 
-Cat::Cat(Cat const & src) : Animal(src.type)
+Cat::Cat(Cat const & src) : Animal(src)
 {
     std::cout << "\033[31m" << "Cat copy constructor was called!" << "\033[0m" << std::endl;
     *this = src;

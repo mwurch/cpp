@@ -14,7 +14,10 @@ Brain::~Brain()
 
 Brain::Brain(Brain const & src)
 {
-	*this = src;
+	std::cout << "Brain copy constructor was called" << std::endl;
+	if (this != &src)
+		for (int i = 0; i < 100; i++)
+			this->ideas[i] = src.ideas[i];
 }
 
 Brain & Brain::operator=(Brain const & src)

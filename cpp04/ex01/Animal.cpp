@@ -6,10 +6,9 @@ Animal::Animal() : type("Default")
     this->brain = new Brain();
 }
 
-Animal::Animal(std::string type) : type(type)
+Animal::Animal(std::string type) : brain(new Brain()), type(type)
 {
     std::cout << "\033[36m" << "Animal constructor with one argument was called!" << "\033[0m" << std::endl;
-    this->brain = new Brain();
 }
 
 Animal::~Animal()
@@ -18,10 +17,9 @@ Animal::~Animal()
     delete this->brain;
 }
 
-Animal::Animal(Animal const & src)
+Animal::Animal(Animal const & src) : brain(new Brain(*src.brain)), type(src.type)
 {
     std::cout << "\033[36m" << "Animal copy constructor was called!" << "\033[0m" << std::endl;
-    *this = src;
 }
 
 Animal & Animal::operator=(Animal const & src)
@@ -44,4 +42,9 @@ void    Animal::makeSound(void) const
 std::string Animal::getType() const
 {
     return (this->type);
+}
+
+Brain* Animal::getBrain()
+{
+    return (brain);
 }
