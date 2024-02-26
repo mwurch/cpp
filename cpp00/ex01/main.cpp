@@ -9,7 +9,7 @@ int main( void )
    
 	myPhoneBook.promptUser();
 	user_input = myPhoneBook.get_user_input();
-	while (user_input != "EXIT" && user_input != "exit")
+	while (user_input != "EXIT" && user_input != "exit" && user_input !=  "EOF")
 	{
 		if (user_input == "ADD" || user_input == "add")
 			myPhoneBook.add();
@@ -17,8 +17,12 @@ int main( void )
 			myPhoneBook.search();
 		else
 			std::cout << user_input << ": unknown command" << std::endl;
-		myPhoneBook.promptUser();
+		user_input = myPhoneBook.get_user_input();
+		if (user_input != "EOF")
+			myPhoneBook.promptUser();
 		user_input = myPhoneBook.get_user_input();
 	}
+	if (user_input == "EOF")
+		std::cerr << std::endl << "" << "Stop using CNTL D!!" << std::endl;
 	return (0);
 }

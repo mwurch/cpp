@@ -29,7 +29,11 @@ void	PhoneBook::decrease_contact_count( void )
 void	PhoneBook::promptUser()
 {
 	std::cout << "Please enter one of the following commands --> \"ADD\" \"SEARCH\" \"EXIT\": ";
-	std::getline(std::cin, this->user_input);
+	if (!std::getline(std::cin, this->user_input))
+	{
+		this->user_input = "EOF";
+		std::cin.clear();
+	}
 }
 
 void			PhoneBook::add_front(Contact & newContact)
@@ -50,19 +54,45 @@ void	PhoneBook::add()
 	std::string firstName, lastName, nickName, secret, phoneNumber;
 
 	std::cout << "Please enter First Name: ";
-	std::getline(std::cin, firstName);
+	if (!std::getline(std::cin, firstName))
+	{
+		this->user_input = "EOF";
+		std::cin.clear();
+		return ;
+	}
 
 	std::cout << "Please enter Last Name: ";
-	std::getline(std::cin, lastName);
+	if (!std::getline(std::cin, lastName))
+	{
+		this->user_input = "EOF";
+		std::cin.clear();
+		return ;
+	}
 
 	std::cout << "Please enter Nickname: ";
-	std::getline(std::cin, nickName);
+	if (!std::getline(std::cin, nickName))
+	{
+		this->user_input = "EOF";
+		std::cin.clear();
+		return ;
+	}
 
 	std::cout << "Please enter Phonenumber: ";
-	std::getline(std::cin, phoneNumber);
+	if (!std::getline(std::cin, phoneNumber))
+	{
+		this->user_input = "EOF";
+		std::cin.clear();
+		return ;
+	}
+
 
 	std::cout << "Please enter Secret: ";
-	std::getline(std::cin, secret);
+	if (!std::getline(std::cin, secret))
+	{
+		this->user_input = "EOF";
+		std::cin.clear();
+		return ;
+	}
 
 	if (secret.empty() || firstName.empty() || lastName.empty() || nickName.empty() || phoneNumber.empty())
 	{
@@ -108,7 +138,12 @@ void	PhoneBook::search()
 		std::cout << std::endl;
 	}
 	std::cout << "Please enter the index of the contact you wish to see more information on: ";
-	std::getline(std::cin, userInput);
+	if (!std::getline(std::cin, userInput))
+	{
+		this->user_input = "EOF";
+		std::cin.clear();
+		return ;
+	}
 	user_input_int = get_data(userInput);
 	if (user_input_int < 1 || user_input_int > this->contact_count)
 	{
