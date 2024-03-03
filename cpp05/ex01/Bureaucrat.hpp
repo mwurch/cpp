@@ -18,9 +18,9 @@ class Bureaucrat
 		Bureaucrat();
 		Bureaucrat(const std::string name, int grade);
 		Bureaucrat(Bureaucrat const & src);
+		Bureaucrat & operator=( Bureaucrat const & src);
 
 		~Bureaucrat();
-		Bureaucrat & operator=( Bureaucrat const & src);
 
 		class GradeTooHighException : public std::invalid_argument
 		{
