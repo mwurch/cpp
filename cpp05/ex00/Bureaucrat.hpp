@@ -3,13 +3,14 @@
 
 #include <iostream>
 #include <stdexcept>
+#include <ostream>
 
 class Bureaucrat
 {
 	private:
 
 		const std::string	_name;
-		int			_grade;
+		int					_grade;
 
 	public:
 	
@@ -40,5 +41,8 @@ class Bureaucrat
 		void		incrementGrade();
 		void		decrementGrade();
 };
+
+std::ostream & operator<<(std::ostream & o, Bureaucrat const & src);
+
 
 #endif

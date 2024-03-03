@@ -23,6 +23,18 @@ Bureaucrat::Bureaucrat(const std::string name, int grade) : _name(name)
         this->_grade = grade;
 }
 
+
+Bureaucrat::Bureaucrat(Bureaucrat const & src) : _name(src._name), _grade(src._grade)
+{
+}
+
+Bureaucrat & Bureaucrat::operator=(Bureaucrat const & src)
+{
+    if (this != &src)
+        this->_grade = src._grade;
+    return (*this);
+}
+
 std::string Bureaucrat::getName() const
 {
     return (this->_name);
@@ -45,4 +57,10 @@ void Bureaucrat::decrementGrade()
     if (_grade == 150)
         throw GradeTooLowException("Grad is already the lowest value possible <150>!");
     _grade++;
+}
+
+std::ostream & operator<<(std::ostream & o, Bureaucrat const & src)
+{
+	o << src.getName() << " has the grade: " << src.getGrade();
+	return (o);
 }
