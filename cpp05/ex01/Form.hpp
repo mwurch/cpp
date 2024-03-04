@@ -1,12 +1,11 @@
 #ifndef FORM_HPP
 #define FORM_HPP
 
-
 #include <iostream>
 #include <ostream>
 #include <stdexcept>
 
-#include "Bureaucrat.hpp"
+class Bureaucrat;
 
 class Form
 {
@@ -44,13 +43,14 @@ class Form
 		};
 
 
-		void		beSigned(Bureaucrat const & src);
+		void		beSigned(Bureaucrat & src);
 		std::string getName() const;
-		const int	getMinGrade() const;
-		const int	getExecGrade() const;
+		int	getMinGrade() const;
+		int	getExecGrade() const;
 
 };
 
 
 std::ostream & operator<<(std::ostream &o, Form const & src);
+
 #endif

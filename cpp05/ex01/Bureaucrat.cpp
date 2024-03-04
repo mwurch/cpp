@@ -1,4 +1,5 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 Bureaucrat::GradeTooHighException::GradeTooHighException() : invalid_argument("Default Exception") {}
 
@@ -59,6 +60,17 @@ void Bureaucrat::decrementGrade()
     if (_grade == 150)
         throw GradeTooLowException("Grad is already the lowest value possible <150>!");
     _grade++;
+}
+
+void Bureaucrat::signForm(Form & form)
+{
+    try {
+        form.beSigned(*this);
+    }
+    catch (std::exception &e)
+    {
+        std::cout << e.what() << std::endl;
+    }
 }
 
 std::ostream & operator<<(std::ostream & o, Bureaucrat const & src)

@@ -31,6 +31,7 @@ int main(int argc, char **argv)
         break ;
     default:
         std::cerr << "[ Probably complaining about insignificant problems ]" << std::endl;
+        break ;
 } 
 
     return (0);

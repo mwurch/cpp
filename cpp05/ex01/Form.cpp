@@ -1,4 +1,5 @@
-#include "From.hpp"
+#include "Form.hpp"
+#include "Bureaucrat.hpp"
 
 Form::GradeTooHighException::GradeTooHighException() : invalid_argument("Default Exception") {}
 
@@ -43,20 +44,28 @@ Form & Form::operator=(Form const & src)
 
 
 
-void		Form::beSigned(Bureaucrat const & src)
+void		Form::beSigned(Bureaucrat & src)
 {
-
+    if (src.getGrade() > this->_minGrade)
+        throw GradeTooLowException("Bureaucrat does not possess the required grade to sign this form!");
+    else if (_isSigned == false)
+    {
+        this->_isSigned = true;
+        std::cout << "Bureaucrat " << src.getName() << " signed " << this->getName() << std::endl;
+    }
+    else
+        std::cout << "Bureaucrat " << src.getName() << " is not able to sign " << this->getName() << ". Form is already signed!" << std::endl;
 }
 
 std::string Form::getName() const
 {
     return (this->_name);
 }
-const int	Form::getMinGrade() const
+int	Form::getMinGrade() const
 {
     return (this->_minGrade);
 }
-const int	Form::getExecGrade() const
+int	Form::getExecGrade() const
 {
     return (this->_execGrade);
 }

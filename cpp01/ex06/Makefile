@@ -1,6 +1,6 @@
 NAME := harlfilter
 CXX := c++
-CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -I. -g -Wno-implicit-fallthrough
+CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -I. -g 
 
 SRC_DIR := .
 OBJ_DIR := obj

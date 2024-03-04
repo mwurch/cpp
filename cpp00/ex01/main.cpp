@@ -23,6 +23,6 @@ int main( void )
 		user_input = myPhoneBook.get_user_input();
 	}
 	if (user_input == "EOF")
-		std::cerr << std::endl << "" << "Stop using CNTL D!!" << std::endl;
+		std::cerr << std::endl << "" << "Ctrl D detected" << std::endl;
 	return (0);
 }

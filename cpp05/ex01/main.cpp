@@ -1,53 +1,19 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 int main()
 {
-    Bureaucrat test = Bureaucrat("Steven", 149);
+	Bureaucrat steven = Bureaucrat("Steven", 150);
+	Bureaucrat olaf = Bureaucrat("Olaf", 1);
 
-    try {
-        test.decrementGrade();
-        std::cout << "Arbeitsamt" << std::endl;
-    }
-    catch(Bureaucrat::GradeTooHighException &e)
-    {
-        std::cout << e.what() << std::endl;
-    }
-    catch(Bureaucrat::GradeTooLowException &e)
-    {
-        std::cout << e.what() << std::endl;
-    }
+	Form Antrag1 = Form("Kindergeld Antrag", 150, 50);
+	Form Antrag2 = Form("Anmeldung einer Wohnung", 1, 50);
 
-    std::cout << "===============================" << std::endl;
-
-    try {
-        std::cout << test.getGrade() << std::endl;
-        test.decrementGrade();
-        std::cout << test.getName() << std::endl;
-    }
-    catch(Bureaucrat::GradeTooHighException &e)
-    {
-        std::cout << e.what() << std::endl;
-    }
-    catch(Bureaucrat::GradeTooLowException &e)
-    {
-        std::cout << e.what() << std::endl;
-    }
-
-    std::cout << "===============================" << std::endl;
-
-    test = Bureaucrat("Olaf" , 1);
-    std::cout << test << std::endl;
-
-    try {
-        test.incrementGrade();
-        std::cout << test.getName() << std::endl;;
-    }
-    catch(Bureaucrat::GradeTooHighException &e)
-    {
-        std::cout << e.what() << std::endl;
-    }
-    catch(Bureaucrat::GradeTooLowException &e)
-    {
-        std::cout << e.what() << std::endl;
-    }
+	//everything OK
+	steven.signForm(Antrag1);
+	olaf.signForm(Antrag2);
+	// Grade too Low KO
+	steven.signForm(Antrag2);
+	// already signed KO
+	olaf.signForm(Antrag1);
 }

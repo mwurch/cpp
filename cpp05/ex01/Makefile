@@ -1,11 +1,11 @@
-NAME := bureaucrat
+NAME := form
 CXX := c++
-CXXFLAGS := -Wall -Wextra -Werror -std=c++98
+CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -I .
 
 SRC_DIR := .
 OBJ_DIR := ./obj
 
-SRC_FILES := main.cpp Bureaucrat.cpp
+SRC_FILES := main.cpp Bureaucrat.cpp Form.cpp
 OBJ_FILES := $(patsubst %.cpp,$(OBJ_DIR)/%.o,$(SRC_FILES))
 OBJ_DIRS := $(sort $(dir $(OBJ_FILES)))
 
