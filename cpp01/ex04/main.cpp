@@ -49,7 +49,6 @@ int main(int argc, char **argv)
 		return (-1);
 	while (std::getline(inputfile, line))
 	{
-		std::cout << "\033[33m" << line << std::endl;
 		line = find_and_replace(line, argv[2], argv[3]);
 		outputfile << line;;
 		if (!inputfile.eof())

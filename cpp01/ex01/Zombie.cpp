@@ -1,13 +1,13 @@
 #include "Zombie.hpp"
 
-Zombie::Zombie()
+Zombie::Zombie() : name("Default Zombie")
 {
-	std::cout << "Hordemember has been created" << std::endl;
+	std::cout << "Zombie constructor was called" << std::endl;
 }
 
 Zombie::Zombie(std::string name) : name(name)
 {
-	announce();
+	std::cout << "Zombie with 1 argument Constructor was called" << std::endl;
 }
 
 Zombie::~Zombie()
@@ -17,10 +17,7 @@ Zombie::~Zombie()
 
 void	Zombie::announce( void )
 {
-	if (this->name == "Foo")
-		std::cout << this->name << ":  BraiiiiiiinnnzzzZ..." << std::endl;
-	else
-		std::cout << '<' << this->name << '>' << ":  BraiiiiiiinnnzzzZ..." << std::endl;
+	std::cout << this->name << ":  BraiiiiiiinnnzzzZ..." << std::endl;
 }
 
 void			Zombie::setName(std::string name)

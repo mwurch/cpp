@@ -16,4 +16,8 @@ int main()
 	steven.signForm(Antrag2);
 	// already signed KO
 	olaf.signForm(Antrag1);
+
+	std::cout << "=============" << std::endl;
+	std::cout << olaf << std::endl;
+	std::cout << Antrag1 << std::endl;
 }

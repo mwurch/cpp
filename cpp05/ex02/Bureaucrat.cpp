@@ -1,5 +1,5 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 
 Bureaucrat::GradeTooHighException::GradeTooHighException() : invalid_argument("Default Exception") {}
 
@@ -62,7 +62,7 @@ void Bureaucrat::decrementGrade()
     _grade++;
 }
 
-void Bureaucrat::signForm(Form & form)
+void Bureaucrat::signForm(AForm & form)
 {
     try {
         form.beSigned(*this);

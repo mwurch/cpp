@@ -1,19 +1,19 @@
-#include "Form.hpp"
+#include "AForm.hpp"
 #include "Bureaucrat.hpp"
 
-Form::GradeTooHighException::GradeTooHighException() : invalid_argument("Default Exception") {}
+AForm::GradeTooHighException::GradeTooHighException() : invalid_argument("Default Exception") {}
 
-Form::GradeTooHighException::GradeTooHighException(const char *message) : invalid_argument(message) {}
+AForm::GradeTooHighException::GradeTooHighException(const char *message) : invalid_argument(message) {}
 
-Form::GradeTooLowException::GradeTooLowException() : invalid_argument("Default Exception") {}
+AForm::GradeTooLowException::GradeTooLowException() : invalid_argument("Default Exception") {}
 
-Form::GradeTooLowException::GradeTooLowException(const char *message) : invalid_argument(message) {}
+AForm::GradeTooLowException::GradeTooLowException(const char *message) : invalid_argument(message) {}
 
-Form::Form() : _name("Default Form"), _isSigned(false), _minGrade(150), _execGrade(150)
+AForm::AForm() : _name("Default Form"), _isSigned(false), _minGrade(150), _execGrade(150)
 {
 }
 
-Form::Form(std::string name, const int minGrade, const int execGrade) : _name(name), _isSigned(false), _minGrade(minGrade), _execGrade(execGrade)
+AForm::AForm(std::string name, const int minGrade, const int execGrade) : _name(name), _isSigned(false), _minGrade(minGrade), _execGrade(execGrade)
 {
     if (_minGrade > 150)
         throw GradeTooLowException("Provided grade is out of range [1, 150]. Please choose a lover grade");
@@ -25,13 +25,13 @@ Form::Form(std::string name, const int minGrade, const int execGrade) : _name(na
         throw GradeTooHighException("Provided grade is out of range [1, 150]. Please choose a higher grade");
 }
 
-Form::~Form() {}
+AForm::~AForm() {}
 
-Form::Form(Form const & src) : _name(src._name), _isSigned(src._isSigned), _minGrade(src._minGrade), _execGrade(src._execGrade)
+AForm::AForm(AForm const & src) : _name(src._name), _isSigned(src._isSigned), _minGrade(src._minGrade), _execGrade(src._execGrade)
 {
 }
 
-Form & Form::operator=(Form const & src)
+AForm & AForm::operator=(AForm const & src)
 {
     if (this != &src)
     {
@@ -44,7 +44,7 @@ Form & Form::operator=(Form const & src)
 
 
 
-void		Form::beSigned(Bureaucrat & src)
+void		AForm::beSigned(Bureaucrat & src)
 {
     if (src.getGrade() > this->_minGrade)
         throw GradeTooLowException("Bureaucrat does not possess the required grade to sign this form!");
@@ -57,26 +57,26 @@ void		Form::beSigned(Bureaucrat & src)
         std::cout << "Bureaucrat " << src.getName() << " is not able to sign " << this->getName() << ". Form is already signed!" << std::endl;
 }
 
-std::string Form::getName() const
+std::string AForm::getName() const
 {
     return (this->_name);
 }
-int	Form::getMinGrade() const
+int	AForm::getMinGrade() const
 {
     return (this->_minGrade);
 }
-int	Form::getExecGrade() const
+int	AForm::getExecGrade() const
 {
     return (this->_execGrade);
 }
 
 
-std::ostream & operator<<(std::ostream & o, Form const & src)
+std::ostream & operator<<(std::ostream & o, AForm const & src)
 {
     o << "==============" << std::endl;
     o << "Form Name                 : " << src.getName() << std::endl;
     o << "Min. Grade to sign        : " << src.getMinGrade() << std::endl; 
-    o << "Grade to exec the form    : " << src.getExecGrade() << std::endl;
+    o << "Grade to Exec the form    : " << src.getExecGrade() << std::endl;
     o << "==============";
     return (o);
 }

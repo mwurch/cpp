@@ -2,7 +2,7 @@
 
 Zombie::Zombie(std::string name) : name(name)
 {
-	announce();
+	std::cout << "Constructor was called for " << this->name << std::endl;
 }
 
 Zombie::~Zombie()

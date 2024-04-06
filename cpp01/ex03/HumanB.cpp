@@ -20,5 +20,8 @@ void    HumanB::setWeapon(Weapon &weapon)
 
 void    HumanB::attack()
 {
-    std::cout << getName() << " attacks with their " << weapon->getType() << std::endl;
+    if (this->weapon == NULL)
+        std::cout << getName() << " is unarmed and chooses to use hurtful words instead!"<< std::endl;
+    else
+        std::cout << getName() << " attacks with their " << weapon->getType() << std::endl;
 }
