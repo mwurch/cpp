@@ -42,6 +42,13 @@ class AForm
 				GradeTooLowException(const char *message);
 		};
 
+		class IsNotSignedException : public std::invalid_argument
+		{
+			public:
+				
+				IsNotSignedException();
+				IsNotSignedException(const char *message);
+		};
 
 		void				beSigned(Bureaucrat & src);
 		virtual void		execute(Bureaucrat const & executor) const = 0;

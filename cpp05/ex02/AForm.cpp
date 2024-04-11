@@ -9,6 +9,12 @@ AForm::GradeTooLowException::GradeTooLowException() : invalid_argument("Default 
 
 AForm::GradeTooLowException::GradeTooLowException(const char *message) : invalid_argument(message) {}
 
+AForm::IsNotSignedException::IsNotSignedException() : invalid_argument("Default Exception") {}
+
+AForm::IsNotSignedException::IsNotSignedException(const char *message) : invalid_argument(message) {}
+
+
+
 AForm::AForm() : _name("Default Form"), _isSigned(false), _minGrade(150), _execGrade(150)
 {
 }
