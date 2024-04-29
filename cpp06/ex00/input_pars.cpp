@@ -21,7 +21,7 @@ bool	isINT(const std::string & input)
 {
 	std::string tmp = input;
 	if (input[0] == '-' || input[0] == '+')
-		tmp.erase(0);
+		tmp.erase(0,0);
 	size_t pos = tmp.find_first_not_of("0123456789");
 	if (pos != std::string::npos)
 		return false;
@@ -39,7 +39,7 @@ bool	isFLOAT(const std::string & input)
 {
 	std::string tmp = input;
 	if (input[0] == '-' || input[0] == '+')
-		tmp.erase(0);
+		tmp.erase(0,0);
 	size_t pos = tmp.find_first_not_of("0123456789.f");
 	if (pos != std::string::npos)
 		return false;
@@ -54,7 +54,7 @@ bool	isDOUBLE(const std::string & input)
 {
 	std::string tmp = input;
 	if (input[0] == '-' || input[0] == '+')
-		tmp.erase(0);
+		tmp.erase(0,0);
 	size_t pos = tmp.find_first_not_of("0123456789.");
 	if (pos != std::string::npos)
 		return false;
