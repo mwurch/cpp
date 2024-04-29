@@ -30,7 +30,7 @@ void ScalarConverter::convert(std::string input)
 			break;
 		case FLOAT:
 		{
-			if (_test > std::numeric_limits<float>::max() || _test < std::numeric_limits<float>::min())
+			if (_test > std::numeric_limits<float>::max() || _test < -std::numeric_limits<float>::max())
 				throw std::out_of_range("FLoat is out of range");
 			float f; iss >> f;
 			printFloat(f);

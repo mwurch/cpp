@@ -36,11 +36,13 @@ void	printInt(int i)
 		std::cout << "char: non printable" << std::endl;
 	else
 		std::cout << "char: '" << c << "'" << std::endl;
+
 	if (isInIntRange(d))
 		std::cout << "int: " << i << std::endl;
 	else
 		std::cout << "int: impossible" << std::endl;
-	if (d > std::numeric_limits<float>::max() || d < std::numeric_limits<float>::min())
+
+	if (d > std::numeric_limits<float>::max() || d < -std::numeric_limits<float>::max())
 		std::cout << "float: impossible" << std::endl;
 	else
 		std::cout << "float: " << f << (f == std::floor(f) ? ".0f" : "f") << std::endl;
@@ -67,7 +69,7 @@ void	printFloat(float f)
 		std::cout << "int: " << i << std::endl;
 	else
 		std::cout << "int: impossible" << std::endl;
-	if (d > std::numeric_limits<float>::max() || d < std::numeric_limits<float>::min())
+	if (d > std::numeric_limits<float>::max() || d < -std::numeric_limits<float>::max())
 		std::cout << "float: impossible" << std::endl;
 	else
 		std::cout << "float: " << f << (f == std::floor(f) ? ".0f" : "f") << std::endl;
@@ -94,7 +96,7 @@ void	printDouble(double d)
 		std::cout << "int: " << i << std::endl;
 	else
 		std::cout << "int: impossible" << std::endl;
-	if (d > std::numeric_limits<float>::max() || d < std::numeric_limits<float>::min())
+	if (d > std::numeric_limits<float>::max() || d < -std::numeric_limits<float>::max())
 		std::cout << "float: impossible" << std::endl;
 	else
 		std::cout << "float: " << f << (f == std::floor(f) ? ".0f" : "f") << std::endl;
