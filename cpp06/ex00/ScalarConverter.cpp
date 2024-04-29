@@ -43,6 +43,8 @@ void ScalarConverter::convert(std::string input)
 			break;
 		}
 		case PSEUDO:
+			printPseudo(input);
+			break ;
 		case UNKNOWN:
 			std::cout << "Invalid Input: " << input << std::endl; 
 			break;

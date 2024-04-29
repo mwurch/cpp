@@ -103,6 +103,22 @@ void	printDouble(double d)
 	std::cout << "double: " << d << (f == std::floor(d) ? ".0" : "") << std::endl;
 }
 
+void	printPseudo(std::string & input)
+{
+	std::cout << "char: impossible" << std::endl; 
+	std::cout << "int: impossible" << std::endl; 
+	std::cout << "float: " << input << (input == "nan" || input == "-inf" || input == "+inf"  ? "f" : "") << std::endl;
+	if (input == "nan" || input == "-inf" || input == "+inf")
+		std::cout << "double: " << input << std::endl; 
+	else
+	{
+		input.resize(input.size() - 1);
+		std::cout << "double: " << input << std::endl; 
+	}
+		
+
+}
+
 
 // util
 
