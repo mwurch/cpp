@@ -1,23 +1,15 @@
 #ifndef SCALARTYPES_HPP
 #define SCALARTYPES_HPP
 
-typedef enum type
+typedef enum s_type
 {
 	CHAR,
 	INT,
 	FLOAT,
 	DOUBLE,
+	PSEUDO,
 	UNKNOWN
-};
+}t_type;
 
-typedef struct s_info
-{
-		char	c;
-		int		i;
-		float	f;
-		double	d;
-		type	type;
-
-} t_info;
 
 #endif

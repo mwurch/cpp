@@ -1,7 +1,7 @@
 #include "input_pars.hpp"
 
 
-type get_type(const std::string & input)
+t_type get_type(const std::string & input)
 {
 	if (isINT(input))
 		return INT;
@@ -11,6 +11,8 @@ type get_type(const std::string & input)
 		return FLOAT;
 	else if (isDOUBLE(input))
 		return DOUBLE;
+	else if (isPSEUDO(input))
+		return PSEUDO;
 	else
 		return UNKNOWN;
 }
@@ -61,13 +63,25 @@ bool	isDOUBLE(const std::string & input)
 	return true;
 }
 
+bool	isPSEUDO(const std::string & input)
+{
+	std::string pseudoTypes[] = {"-inf", "+inf", "nan", "-inff", "+inff", "nanf"};
+
+	for (int index = 0; index < 6; index++)
+	{
+		if (pseudoTypes[index] == input)
+			return true;
+	}
+	return false;
+}
+
 //util
 
 size_t	count_char(std::string input, char c)
 {
 	size_t count = 0;
 
-	for (int index = 0; index < input.size(); index++)
+	for (size_t index = 0; index < input.size(); index++)
 	{
 		if (input[index] == c)
 			count++;

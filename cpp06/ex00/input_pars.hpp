@@ -8,11 +8,12 @@
 
 
 //functions to get type
-type get_type(const std::string & input);
+t_type get_type(const std::string & input);
 bool	isINT(const std::string & input);
 bool	isCHAR(const std::string & input);
 bool	isFLOAT(const std::string & input);
 bool	isDOUBLE(const std::string & input);
+bool	isPSEUDO(const std::string & input);
 
 
 // util
