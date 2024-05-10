@@ -29,6 +29,8 @@ Fixed::~Fixed()
     std::cout << "Destructor called" << std::endl;
 }
 
+// overloaded  operators
+
 Fixed & Fixed::operator=(Fixed const & src)
 {
     std::cout << "Copy assignment operator called" << std::endl;
@@ -37,6 +39,82 @@ Fixed & Fixed::operator=(Fixed const & src)
     return (*this);
 }
 
+bool    Fixed::operator<(Fixed const &src) const
+{
+    return (this->toFloat() < src.toFloat());
+}
+
+bool    Fixed::operator>(Fixed const & src) const
+{
+    return (this->toFloat() > src.toFloat());
+}
+
+bool    Fixed::operator>=(Fixed const & src) const
+{
+    return (this->toFloat() >= src.toFloat());
+}
+
+bool    Fixed::operator<=(Fixed const & src) const
+{
+    return (this->toFloat() <= src.toFloat());
+}
+
+bool    Fixed::operator==(Fixed const & src) const
+{
+    return (this->toFloat() == src.toFloat());
+}
+
+bool    Fixed::operator!=(Fixed const & src) const
+{
+    return (this->toFloat() != src.toFloat());
+}
+
+float    Fixed::operator-(Fixed const & src) const
+{
+    return (this->toFloat() - src.toFloat());
+}
+
+float    Fixed::operator+(Fixed const & src) const
+{
+    return (this->toFloat() + src.toFloat());
+}
+
+float    Fixed::operator*(Fixed const & src) const
+{
+    return (this->toFloat() * src.toFloat());
+}
+
+float    Fixed::operator/(Fixed const & src) const
+{
+    return (this->toFloat() / src.toFloat());
+}
+
+Fixed  Fixed::operator++(int)
+{
+    Fixed tmp = *this;
+    this->_fixedNumber++;
+    return(tmp);
+}
+
+Fixed  Fixed::operator--(int)
+{
+    Fixed tmp = *this;
+    this->_fixedNumber--;
+    return(tmp);
+}
+
+Fixed & Fixed::operator++()
+{
+    this->_fixedNumber++;
+    return (*this);
+}
+
+Fixed & Fixed::operator--()
+{
+    this->_fixedNumber--;
+    return (*this);
+}
+// member functions
 int     Fixed::getRawBits(void) const
 {
     std::cout << "getRawBits member function called" << std::endl;
@@ -56,6 +134,39 @@ float   Fixed::toFloat(void) const
 int     Fixed::toInt(void) const
 {
     return (this->_fixedNumber >> _fractionalBits);
+}
+
+
+Fixed & Fixed::min(Fixed &a, Fixed &b)
+{
+    if (a > b)
+        return (b);
+    else
+        return (a);
+}
+
+const Fixed & Fixed::min(const Fixed &a, const Fixed &b)
+{
+    if (a > b)
+        return (b);
+    else
+        return (a);
+}
+
+Fixed & Fixed::max(Fixed &a, Fixed &b)
+{
+    if (a > b)
+        return (a);
+    else
+        return (b);
+}
+
+const Fixed & Fixed::max(const Fixed &a, const Fixed &b)
+{
+    if (a > b)
+        return (a);
+    else
+        return (b);
 }
 
 std::ostream & operator<<(std::ostream & o, Fixed const & src)
