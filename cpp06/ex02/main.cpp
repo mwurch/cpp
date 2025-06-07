@@ -1,4 +1,5 @@
-#include <random>
+#include <ctime>
+#include <cstdlib>
 #include <iostream>
 #include <exception>
 
@@ -11,11 +12,8 @@
 
 Base*   generate(void)
 {
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dis(0, 2);
-
-    int number = dis(gen);
+    srand(time(NULL));
+    int number = rand() % 3;
 
     switch(number)
     {
@@ -37,7 +35,7 @@ Base*   generate(void)
         default:
         {
             std::cerr << "Error" << std::endl;
-            return nullptr;
+            return NULL;
         }
     }
 }
