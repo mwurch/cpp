@@ -19,8 +19,10 @@ void ScalarConverter::convert(std::string input)
 	{
 		case INT:
 		{
-			if (!isInIntRange(_test))
-				throw std::out_of_range("Int is out of range");
+			if (!isInIntRange(_test)){
+				printDouble(_test);
+				break;
+			}
 			int i = std::atoi(input.c_str());
 			printInt(i);
 			break;
@@ -30,9 +32,11 @@ void ScalarConverter::convert(std::string input)
 			break;
 		case FLOAT:
 		{
+			if (input.back() == 'f')
+				input.pop_back();
 			if (_test > std::numeric_limits<float>::max() || _test < -std::numeric_limits<float>::max())
 				throw std::out_of_range("FLoat is out of range");
-			float f; iss >> f;
+			float f = static_cast<float>(std::strtof(input.c_str(), NULL));
 			printFloat(f);
 			break;
 		}

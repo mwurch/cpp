@@ -5,12 +5,9 @@
 #include "A.hpp"
 #include "B.hpp"
 #include "C.hpp"
+#include "Base.hpp"
 
-int main(void)
-{
-    
 
-}
 
 Base*   generate(void)
 {
@@ -29,7 +26,7 @@ Base*   generate(void)
         }
         case(1):
         {
-            std::cout << "A was created!" << std::endl;
+            std::cout << "B was created!" << std::endl;
             return (new B());
         }
         case(2):
@@ -57,21 +54,33 @@ void    identify(Base* p)
         std::cout << "Invalid pointer" << std::endl;
 }
 
-void    idenify(Base& p)
+void    identify(Base& p)
 {
     try{
-        dynamic_cast<A &>(p);
+        A &a =dynamic_cast<A &>(p);
+        (void)a;
         std::cout << "The referance is of type A" << std::endl;
         return ;
-    }catch(std::exception &e) {std::cout << e.what() << std::endl;}
+    }catch(std::exception &e) {}
     try{
-        dynamic_cast<B &>(p);
+        B& b = dynamic_cast<B &>(p);
+        (void)b;
         std::cout << "The referance is of type B" << std::endl;
         return ;
-    }catch( std::exception &e) {std::cout << e.what() << std::endl;}
+    }catch( std::exception &e) {}
     try{
-        dynamic_cast<C &>(p);
+        C &c = dynamic_cast<C &>(p);
+        (void)c;
         std::cout << "The referance is of type C" << std::endl;
         return ;
-    }catch(std::exception &e) {std::cout << e.what() << std::endl;}
+    }catch( std::exception &e) {}
+}
+
+int main(void)
+{
+    Base* ptr = generate();
+    Base& ref = *ptr;
+
+    identify(ptr);
+    identify(ref);
 }

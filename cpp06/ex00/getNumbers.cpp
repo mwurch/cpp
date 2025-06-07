@@ -100,7 +100,7 @@ void	printDouble(double d)
 		std::cout << "float: impossible" << std::endl;
 	else
 		std::cout << "float: " << f << (f == std::floor(f) ? ".0f" : "f") << std::endl;
-	std::cout << "double: " << d << (f == std::floor(d) ? ".0" : "") << std::endl;
+	std::cout << "double: " << d << (f == std::floor(d) ? ".0yy" : "") << std::endl;
 }
 
 void	printPseudo(std::string & input)
