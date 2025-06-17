@@ -35,7 +35,7 @@ void    Span::fillSpan(Inputit begin, Inputit end)
 {
     if ((static_cast<size_t>(std::distance(begin, end)) + this->_vec.size()) > _max)
         throw (std::out_of_range("The given container has to many entries"));
-    for (Inputit it = begin; it != end; it++)
+    for (Inputit it = begin; it != end; ++it)
         addNumber(*it);
 }
 

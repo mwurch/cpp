@@ -39,10 +39,13 @@ long    Span::shortestSpan(void)
 {
     if (this->_vec.size() <= 1)
         throw( std::logic_error("Can't calculate a span with 1 or fewer numbers"));
-    else
-    {
-        std::sort(_vec.begin(), _vec.end());
-        return (static_cast<long>(_vec[1]) - static_cast<long>(_vec[0]));
+    std::sort(_vec.begin(), _vec.end());
+    long minSpan = static_cast<long>(_vec[1]) - static_cast<long>(_vec[0]);
+    for (size_t i = 2; i < _vec.size(); ++i) {
+        long diff = static_cast<long>(_vec[i]) - static_cast<long>(_vec[i - 1]);
+        if (diff < minSpan)
+            minSpan = diff;
     }
+    return minSpan;
 }
 

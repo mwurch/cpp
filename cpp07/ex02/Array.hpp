@@ -36,14 +36,14 @@ class Array
             return (*this);
         }
 
-        T & operator[](size_t & index)
+       T & operator[](size_t index) 
         {
             if (index >= this->_size)
                 throw (std::out_of_range("The given index is out of range of this array"));
             return (this->_arr[index]);
         }
 
-        const T & operator[](size_t const & index)
+        const T & operator[](size_t index) const
         {
             if (index >= this->_size)
                 throw (std::out_of_range("The given index is out of range of this array"));
