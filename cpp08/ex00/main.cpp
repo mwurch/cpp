@@ -4,7 +4,7 @@
 
 int main() {
     
-    int initial_values[] = {10, 20, 30, 40, 50};
+    int initial_values[] = {10, 20, 30, 40, 50, 60};
     std::vector<int> vec(initial_values, initial_values + sizeof(initial_values) / sizeof(int));
 
     int target = 60;
