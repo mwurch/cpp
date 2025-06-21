@@ -7,7 +7,7 @@ int main(int argc, char **argv)
     {
         try{
             BitcoinExchange btc("data.csv");
-            btc.analzyeInputfile(argv[1]);
+            btc.analyzeInputfile(argv[1]);
         }
         catch(std::exception & e)
         {

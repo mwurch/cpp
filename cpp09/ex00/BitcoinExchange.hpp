@@ -27,19 +27,19 @@ class	BitcoinExchange
 
 	public:
 
-		BitcoinExchange(std::string inputFile);
+		BitcoinExchange(const std::string& inputFile);
 		BitcoinExchange(BitcoinExchange const & src);
 		~BitcoinExchange();
 
 		BitcoinExchange& operator=(BitcoinExchange const & src);
 
-		void	analzyeInputfile(std::string inFile);
-		Error		analyzeLine(std::string line);
+		void	analyzeInputfile(const std::string& inFile);
+		Error		analyzeLine(const std::string& line);
 
 };
 
-bool	isValidDate(std::string date);
-bool	isValidExt(std::string fileName);
-void	errorMessage(Error errCode, std::string line);
+bool	isValidDate(const std::string& date);
+bool	isValidExt(const std::string& fileName);
+void	errorMessage(Error errCode, const std::string& line);
 
 #endif

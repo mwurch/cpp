@@ -7,7 +7,7 @@ BitcoinExchange::BitcoinExchange(BitcoinExchange const & src)
 	*this = src;
 }
 
-BitcoinExchange::BitcoinExchange(std::string dataFile)
+BitcoinExchange::BitcoinExchange(const std::string& dataFile)
 {
 	std::string line;
 	std::string date;
@@ -15,7 +15,7 @@ BitcoinExchange::BitcoinExchange(std::string dataFile)
 	double		doubleValue;
 
 	if (!isValidExt(dataFile))
-		throw (std::runtime_error("Wrong datafile extention. *.csv file needed"));
+		throw (std::runtime_error("Wrong datafile extension. *.csv file needed"));
 	std::ifstream file(dataFile.c_str());
 	if (!file.is_open())
 		throw (std::runtime_error("Failed to open file: " + dataFile));
@@ -26,7 +26,7 @@ BitcoinExchange::BitcoinExchange(std::string dataFile)
 		throw (std::runtime_error("Wrong Data Structure! Datafile must start with 'date,exchange_rate' and all following lines are data"));
 	while (std::getline(file, line))
 	{
-		if (line[0]== 0)
+		if (line.empty())
 		 continue;
 		std::stringstream ss(line);
 		std::getline(ss, date, ',');
@@ -71,7 +71,7 @@ BitcoinExchange &BitcoinExchange::operator=(BitcoinExchange const & src)
 	return (*this);
 }
 
-Error		BitcoinExchange::analyzeLine(std::string line)
+Error		BitcoinExchange::analyzeLine(const std::string& line)
 {
 	std::string date;
 	std::string value;
@@ -107,11 +107,11 @@ Error		BitcoinExchange::analyzeLine(std::string line)
 	else
 		if (!_data.empty())
 			it--;
-	std::cout << it->first << " => " << btc_Count * it->second << std::endl;
+	std::cout << date << " => " << btc_Count << " = " << btc_Count * it->second << std::endl;
 	return OK;
 }
 
-void	BitcoinExchange::analzyeInputfile(std::string inFile)
+void	BitcoinExchange::analyzeInputfile(const std::string& inFile)
 {
 	std::string line;
 	Error	errCode;
@@ -140,22 +140,21 @@ void	BitcoinExchange::analzyeInputfile(std::string inFile)
 	(void)errCode;
 }
 
-void	errorMessage(Error errCode, std::string line)
+void	errorMessage(Error errCode, const std::string& line)
 {
 	switch (errCode)
 	{
-		case OK:
 		case NEG:
-			std::cout << "Error: not a positive number: " << line << std::endl;
+			std::cout << "Error: not a positive number." << std::endl;
 			break;
 		case BAD_IN:
-			std::cout << "Error: bad input: " << line << std::endl; 
+			std::cout << "Error: bad input => " << line << std::endl; 
 			break;
 		case TOO_EARLY:
-			std::cout << "Error: date too early: " << line << std::endl;
+			std::cout << "Error: date too early => " << line << std::endl;
 			break;
 		case TOO_LARGE:
-			std::cout << "Error: number over 1000: " << line << std::endl;
+			std::cout << "Error: too large a number."<< std::endl;
 			break;
 		default:
 			break;
@@ -163,7 +162,7 @@ void	errorMessage(Error errCode, std::string line)
 }
 
 
-bool	isValidDate(std::string date)
+bool	isValidDate(const std::string& date)
 {
 	int year, month, day;
 	char c1, c2;
@@ -191,7 +190,7 @@ bool	isValidDate(std::string date)
 	return true;
 }
 
-bool	isValidExt(std::string fileName)
+bool	isValidExt(const std::string& fileName)
 {
 	const std::string ext = ".csv";
 
