@@ -5,7 +5,7 @@ RPN::~RPN() {}
 RPN & RPN::operator=(const RPN&) {return *this;}
 RPN::RPN(const RPN&) {}
 
-bool    RPN::isValid(std::string term)
+bool    RPN::isValid(const std::string& term)
 {
     size_t opCount = 0, dCount = 0, index = 0;
 
@@ -67,12 +67,14 @@ int     RPN::do_calculation(int operand1, int operand2, char op)
     }
 }
 
-void    RPN::calculate(std::string term)
+void    RPN::calculate(const std::string& term)
 {
     int operand1, operand2, result = 0;
 
     size_t index = 0;
-
+    // clearing stack before starting a new calculation
+    while(!_stack.empty())
+        _stack.pop();
     // Errorhandling
     if (!isValid(term))
         return;
@@ -84,6 +86,10 @@ void    RPN::calculate(std::string term)
             _stack.push(term[index] - '0');
         else if (strchr(OPERATOR.c_str(), term[index]))
         {
+            if (_stack.size() < 2) {
+                std::cerr << "Error" << std::endl;
+                return;
+            }
             operand2 = _stack.top();
             _stack.pop();
             operand1 = _stack.top();
@@ -91,12 +97,16 @@ void    RPN::calculate(std::string term)
             try{
                 result = do_calculation(operand1 , operand2, term[index]);
             } catch(std::exception &e) {
-                std::cout << "Error: " << e.what() << std::endl;
+                std::cerr << "Error" << std::endl;
                 return ;
             }
             _stack.push(result);
         }
         index++;
     }
-    std::cout << result << std::endl;
+    if (_stack.size() != 1) {
+        std::cerr << "Error" << std::endl;
+        return;
+    }
+    std::cout << _stack.top() << std::endl;
 }

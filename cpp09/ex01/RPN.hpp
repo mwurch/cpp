@@ -18,13 +18,13 @@ class RPN
         RPN(const RPN&);
         RPN&           operator=(const RPN&);
         int             do_calculation(int operand1, int operand2, char op);
-        bool            isValid(std::string term);
+        bool            isValid(const std::string& term);
         
     public:
 
         RPN();
         ~RPN();
-        void            calculate(std::string term);
+        void            calculate(const std::string& term);
 
 };
 
