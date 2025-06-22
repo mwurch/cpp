@@ -1,8 +1,15 @@
 #include "PmergeMe.hpp"
 
-int	main(int argc, char** argv)
+int main(int argc, char** argv)
 {
-	PmergeMe	sort;
-	sort.sort(argv, argc);
-	return 0;
+    if (argc < 2)
+    {
+        std::cerr << "Error" << std::endl;
+        return 1;
+    }
+
+    PmergeMe sorter;
+    sorter.sort(argv, argc);
+
+    return 0;
 }

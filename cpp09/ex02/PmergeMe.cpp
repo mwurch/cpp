@@ -6,6 +6,27 @@ PmergeMe::~PmergeMe() {}
 PmergeMe::PmergeMe(const PmergeMe&) {}
 PmergeMe& PmergeMe::operator=(const PmergeMe&) {return *this;}
 
+std::vector<size_t> generateJacobsthalIndices(size_t count)
+{
+	std::vector<size_t> indices;
+	size_t j1 = 0;
+	size_t j2 = 1;
+	size_t j = j1 * 2 + j2;
+
+	while (j < count)
+	{
+		for (size_t i = j; i > j1; --i)
+			indices.push_back(i - 1);
+		j1 = j2;
+		j2 = j;
+		j = j1 * 2 + j2;
+	}
+	for (size_t i = count; i > j1; --i)
+		indices.push_back(i - 1);
+
+	return indices;
+}
+
 bool    PmergeMe::parseInput(char **argv, int argc)
 {
 	if (argc <= 2)
@@ -60,7 +81,7 @@ void	PmergeMe::sortVec()
 	}
 
 	mergeSort(pairs, 0, pairs.size() - 1);
-	insert(pairs,_sortedVec); // potential error
+	insert(pairs,_sortedVec); 
 	//insert last value in case of odd amount of numbers
 	if (rest != -1)
 	{
@@ -183,11 +204,16 @@ void PmergeMe::insert(const Pairs& pairs, Container& sortedVec)
 		sortedVec.push_back((*it)[0]);
 	}
 
-	for (typename Pairs::const_iterator it = pairs.begin(); it != pairs.end(); ++it)
+	std::vector<size_t> jacobIndices = generateJacobsthalIndices(pairs.size());
+
+	for (size_t i = 0; i < jacobIndices.size(); ++i)
 	{
-		if ((*it).size() > 1) {
-			typename Container::iterator insertIt = std::lower_bound(sortedVec.begin(), sortedVec.end(), (*it)[1]);
-			sortedVec.insert(insertIt, (*it)[1]);
+		size_t index = jacobIndices[i];
+		if (index >= pairs.size())
+			continue;
+		if (pairs[index].size() > 1) {
+			typename Container::iterator insertIt = std::lower_bound(sortedVec.begin(), sortedVec.end(), pairs[index][1]);
+			sortedVec.insert(insertIt, pairs[index][1]);
 		}
 	}
 }
@@ -195,7 +221,7 @@ void PmergeMe::insert(const Pairs& pairs, Container& sortedVec)
 void	PmergeMe::printResult()
 {
 	int elementCount = _numbers.size();
-	std::cout << "Befor: ";
+	std::cout << "Before Vec: ";
 	for (std::vector<int>::iterator it = _numbers.begin(); it != _numbers.end(); it++)
 	{
 		std::cout << *it << " ";
@@ -207,6 +233,21 @@ void	PmergeMe::printResult()
 		std::cout << *it << " ";
 	}
 	std::cout << std::endl;
+
+	std::cout << "Before Deque: ";
+	for (std::vector<int>::iterator it = _numbers.begin(); it != _numbers.end(); it++)
+	{
+		std::cout << *it << " ";
+	}
+	std::cout << std::endl;
+	std::cout << "After:   ";
+	for (std::deque<int>::iterator it = _sortedDeq.begin(); it != _sortedDeq.end(); it++)
+	{
+		std::cout << *it << " ";
+	}
+	std::cout << std::endl;
+
 	std::cout << "Time to process a range of " << elementCount << " elements with std::vector<int> : " << _vecTime << " us" << std::endl;
 	std::cout << "Time to process a range of " << elementCount << " elements with std::deque<int> : " << _deqTime << " us" << std::endl;
 }
+

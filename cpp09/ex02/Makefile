@@ -2,23 +2,20 @@ NAME := PmergeMe
 CXX := c++
 CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -g
 
-SRC_DIR := .
-OBJ_DIR := ./obj
-
 SRC_FILES := main.cpp PmergeMe.cpp
-OBJ_FILES := $(patsubst %.cpp,$(OBJ_DIR)/%.o,$(SRC_FILES))
-OBJ_DIRS := $(sort $(dir $(OBJ_FILES)))
+OBJ_DIR := obj
+OBJ_FILES := $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.cpp=.o))
 
 all: $(NAME)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIRS) 
-	$(CXX) $(CXXFLAGS) $< -c -o $@
-
-$(OBJ_DIRS):
+$(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
+$(OBJ_DIR)/%.o: %.cpp | $(OBJ_DIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
 $(NAME): $(OBJ_FILES)
-	$(CXX) $^ -o $@
+	$(CXX) $(CXXFLAGS) $^ -o $@
 
 clean:
 	@rm -rf $(OBJ_DIR)
